@@ -1,0 +1,25 @@
+.header {
+    background: $dark-blue;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.header-items {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-item {
+    color: $off-white;
+    font-size: $s-size;
+    padding: $xs-size;
+    text-decoration: none;
+}
+
+.header-title {
+    color: $off-white;
+    font-size: $xl-size;
+    text-decoration: none;
+}
