@@ -9,20 +9,20 @@ import CreateBoard from '../components/CreateBoard';
 import EditBoard from '../components/EditBoard';
 
 const AppRouter = () => {
-    return (
-        <BrowserRouter>
-            <div>
-                <Header />
-                <Switch>
-                    <Route exact path="/" component={Dashboard} />
-                    <Route path="/help" component={Help} />
-                    <Route path="/create" component={CreateBoard} />
-                    <Route path="/edit/:id" component={EditBoard} />
-                    <Route component={NotFoundPage} />
-                </Switch>
-            </div>
-        </BrowserRouter>
-    );
-}
+  return (
+    <BrowserRouter>
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/help" component={Help} />
+          <Route path="/create" component={CreateBoard} />
+          <Route path="/edit/:id" component={EditBoard} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default AppRouter;
