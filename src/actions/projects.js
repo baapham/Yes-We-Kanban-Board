@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 
-const addProject = ({
+export const addProject = ({
   title = '',
   description = '',
   createdAt = 0,
@@ -14,12 +14,7 @@ const addProject = ({
   },
 });
 
-const removeProject = ({ id } = {}) => ({
+export const removeProject = ({ id } = {}) => ({
   type: 'REMOVE_PROJECT',
-  id,
-});
-
-const viewProject = id => ({
-  type: 'VIEW_PROJECT',
   id,
 });

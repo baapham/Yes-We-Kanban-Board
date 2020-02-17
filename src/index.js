@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './styles/styles.scss';
 import AppRouter from './routers/AppRouter';
 import * as serviceWorker from './serviceWorker';
+import configureStore from './store/configureStore';
+import { addProject, removeProject } from './actions/projects';
+
+const store = configureStore();
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));
 
