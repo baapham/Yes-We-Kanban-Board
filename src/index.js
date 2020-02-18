@@ -11,7 +11,6 @@ const store = configureStore();
 
 store.dispatch(
   addProject({
-    id: 2,
     title: 'hello',
     description: 'world',
     createdAt: 20,

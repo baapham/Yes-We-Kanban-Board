@@ -1,7 +1,18 @@
 import React from 'react';
-
-const CreateBoard = () => {
-  return <div>This is the create board page</div>;
+import { connect } from 'react-redux';
+import AddProjectForm from './AddProjectForm';
+import { addProject } from '../actions/projects';
+const CreateBoard = props => {
+  return (
+    <div>
+      <AddProjectForm
+        onSubmit={project => {
+          props.dispatch(addProject(project));
+          props.history.push('/');
+        }}
+      />
+    </div>
+  );
 };
 
-export default CreateBoard;
+export default connect()(CreateBoard);
