@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './styles/styles.scss';
 import AppRouter from './routers/AppRouter';
 import * as serviceWorker from './serviceWorker';
@@ -8,7 +9,30 @@ import { addProject, removeProject } from './actions/projects';
 
 const store = configureStore();
 
-ReactDOM.render(<AppRouter />, document.getElementById('root'));
+store.dispatch(
+  addProject({
+    id: 2,
+    title: 'hello',
+    description: 'world',
+    createdAt: 20,
+  }),
+);
+store.dispatch(
+  addProject({
+    title: 'caa',
+    description: 'baa',
+    createdAt: 20,
+  }),
+);
+console.log(store.getState());
+
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+
+ReactDOM.render(jsx, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
