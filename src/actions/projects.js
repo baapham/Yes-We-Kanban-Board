@@ -27,6 +27,17 @@ export const removeProject = ({ id } = {}) => ({
   id,
 });
 
+export const startRemoveProject = ({ id } = {}) => {
+  return dispatch => {
+    return database
+      .ref(`projects/${id}`)
+      .remove()
+      .then(() => {
+        dispatch(removeProject({ id }));
+      });
+  };
+};
+
 export const setProjects = projects => ({
   type: 'SET_PROJECTS',
   projects,

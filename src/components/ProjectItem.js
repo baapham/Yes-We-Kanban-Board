@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeProject } from '../actions/projects';
+import { startRemoveProject } from '../actions/projects';
 
 const ProjectItem = props => {
   return (
@@ -9,7 +9,7 @@ const ProjectItem = props => {
       <p>{props.project.description}</p>
       <button
         onClick={() => {
-          props.dispatch(removeProject(props.project));
+          props.dispatch(startRemoveProject(props.project));
         }}
       >
         Remove
