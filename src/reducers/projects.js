@@ -8,6 +8,8 @@ export default (state = projectReducerDefaultState, action) => {
       return state.filter(({ id }) => id !== action.id);
     case 'VIEW_PROJECT':
       return state.filter(({ id }) => id === action.id);
+    case 'SET_PROJECTS':
+      return action.projects;
     default:
       return state;
   }

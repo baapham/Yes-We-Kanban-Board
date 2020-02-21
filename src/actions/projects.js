@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import database from '../firebase/firebase';
 
 export const addProject = project => ({
@@ -27,3 +26,26 @@ export const removeProject = ({ id } = {}) => ({
   type: 'REMOVE_PROJECT',
   id,
 });
+
+export const setProjects = projects => ({
+  type: 'SET_PROJECTS',
+  projects,
+});
+
+export const startSetProjects = () => {
+  return dispatch => {
+    return database
+      .ref('projects')
+      .once('value')
+      .then(snapshot => {
+        const projects = [];
+        snapshot.forEach(childSnapshot => {
+          projects.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
+        dispatch(setProjects(projects));
+      });
+  };
+};

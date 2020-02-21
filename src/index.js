@@ -5,38 +5,9 @@ import './styles/styles.scss';
 import AppRouter from './routers/AppRouter';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
-import { addProject, removeProject } from './actions/projects';
-import database from './firebase/firebase';
+import { startSetProjects } from './actions/projects';
 
 const store = configureStore();
-
-store.dispatch(
-  addProject({
-    title: 'hello',
-    description: 'world',
-    createdAt: 20,
-  }),
-);
-store.dispatch(
-  addProject({
-    title: 'caa',
-    description: 'baa',
-    createdAt: 20,
-  }),
-);
-console.log(store.getState());
-
-database.ref('expenses').on('child_added', snapshot => {
-  console.log(snapshot.key, snapshot.val());
-});
-let expense = {
-  description: 'Rent',
-  note: 'This is rent pay',
-  amount: 200,
-  createdAt: 0,
-};
-
-database.ref('expenses').push(expense);
 
 const jsx = (
   <Provider store={store}>
@@ -44,7 +15,11 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('root'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
+
+store.dispatch(startSetProjects()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('root'));
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

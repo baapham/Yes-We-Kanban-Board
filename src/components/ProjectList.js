@@ -6,7 +6,6 @@ const ProjectList = props => {
   return (
     <div>
       <h1>Project List</h1>
-      {props.projects.length}
       {props.projects.map(project => {
         return <ProjectItem key={project.id} project={project} />;
       })}
