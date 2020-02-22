@@ -5,7 +5,7 @@ import Dashboard from '../components/Dashboard';
 import NotFoundPage from '../components/NotFoundPage';
 import Help from '../components/Help';
 import CreateBoard from '../components/CreateBoard';
-import EditBoard from '../components/EditBoard';
+import ProjectBoard from '../components/ProjectBoard';
 import LoginPage from '../components/LoginPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -21,7 +21,10 @@ const AppRouter = () => {
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/help" component={Help} />
           <PrivateRoute path="/create" component={CreateBoard} />
-          <PrivateRoute path="/edit/:id" component={EditBoard} />
+          <PrivateRoute
+            path="/project/:id"
+            component={ProjectBoard}
+          />
           <Route component={NotFoundPage} />
         </Switch>
       </div>
