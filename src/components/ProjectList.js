@@ -6,9 +6,13 @@ const ProjectList = props => {
   return (
     <div>
       <h1>Project List</h1>
-      {props.projects.map(project => {
-        return <ProjectItem key={project.id} project={project} />;
-      })}
+      {props.projects.length === 0 ? (
+        <p>No projects</p>
+      ) : (
+        props.projects.map(project => {
+          return <ProjectItem key={project.id} project={project} />;
+        })
+      )}
     </div>
   );
 };

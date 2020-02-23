@@ -3,6 +3,7 @@ import moment from 'moment';
 const AddProjectForm = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [createdAt, setCreatedAt] = useState(moment());
   const [error, setError] = useState('');
   const onTitleChange = e => {
     const title = e.target.value;
@@ -21,6 +22,7 @@ const AddProjectForm = props => {
       props.onSubmit({
         title,
         description,
+        createdAt: createdAt.valueOf(),
       });
     }
   };
