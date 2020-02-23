@@ -1,6 +1,19 @@
 .task-container {
+  background-color: $off-white;
   border: 1px solid lightgrey;
   border-radius: 2px;
+  display: flex;
   padding: 8px;
   margin-bottom: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.task-container-dragging {
+  @extend .task-container;
+  background-color: $green;
+  border: 1px solid $green;
+}
+
+.drag-handler {
+  margin-right: $s-size;
 }

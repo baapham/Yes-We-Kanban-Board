@@ -33,27 +33,33 @@ export const startAddProject = (projectData = {}) => {
       tasks = {
         'task-1': {
           id: 'task-1',
-          content: 'Task for To Do column',
+          title: 'Task for To Do column',
+          description: 'This is some description',
         },
         'task-2': {
           id: 'task-2',
-          content: 'Task for In Progress column',
+          title: 'Task for In Progress column',
+          description: 'This is some description',
         },
         'task-3': {
           id: 'task-3',
-          content: 'Task for Done column',
+          title: 'Task for Done column',
+          description: 'This is some description',
         },
         'task-4': {
           id: 'task-4',
-          content: 'Task 2 for To Do column',
+          title: 'Task 2 for To Do column',
+          description: 'This is some description',
         },
         'task-5': {
           id: 'task-5',
-          content: 'Task 2 for In Progress column',
+          title: 'Task 2 for In Progress column',
+          description: 'This is some description',
         },
         'task-6': {
           id: 'task-6',
-          content: 'Task 2 for Done column',
+          title: 'Task 2 for Done column',
+          description: 'This is some description',
         },
       },
       columnOrder = ['column-1', 'column-2', 'column-3'],

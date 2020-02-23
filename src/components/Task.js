@@ -4,14 +4,21 @@ import { Draggable } from 'react-beautiful-dnd';
 const Task = props => {
   return (
     <Draggable draggableId={props.task.id} index={props.index}>
-      {provided => (
+      {(provided, snapshot) => (
         <div
-          className="task-container"
+          className={
+            snapshot.isDragging
+              ? 'task-container-dragging'
+              : 'task-container'
+          }
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {props.task.content}
+          <div className="drag-handler" {...provided.dragHandleProps}>
+            &#9776;
+          </div>
+          <h5>{props.task.title}</h5>
+          <p>{props.task.description}</p>
         </div>
       )}
     </Draggable>

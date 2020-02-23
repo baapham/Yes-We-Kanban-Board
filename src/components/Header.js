@@ -12,14 +12,11 @@ const Header = () => {
             YWK
           </NavLink>
           <div>
-            <NavLink className="header-item" to="help">
+            <NavLink className="header-item" to="/help">
               Help
             </NavLink>
-            <NavLink className="header-item" to="create">
+            <NavLink className="header-item" to="/create">
               Create
-            </NavLink>
-            <NavLink className="header-item" to="edit">
-              Edit
             </NavLink>
             <button onClick={startLogout()}>Logout</button>
           </div>

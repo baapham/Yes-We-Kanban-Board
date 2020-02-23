@@ -1,12 +1,29 @@
 .column-container {
-  margin: 8px;
+  background-color: $off-white;
   border: 1px solid lightgrey;
   border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  width: 40rem;
 }
 .column-title {
   padding: 8px;
+  text-align: center;
 }
 
 .column-list {
+  background-color: $off-white;
+  flex-grow: 1;
+  min-height: 40rem;
   padding: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.column-list-dragging {
+  @extend .column-list;
+  background-color: $blue;
+}
+
+.add-task {
 }
