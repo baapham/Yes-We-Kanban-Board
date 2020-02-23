@@ -1,12 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startRemoveProject } from '../actions/projects';
+import {
+  startRemoveProject,
+  startUpdateProject,
+} from '../actions/projects';
 import KanbanColumns from './KanbanColumns';
 
 const ProjectBoard = props => {
   const removeProject = () => {
     props.startRemoveProject({ id: props.project.id });
     props.history.push('/');
+  };
+  const onProjectUpdate = project => {
+    props.startUpdateProject(props.project.id, project);
   };
   return (
     <div>
@@ -18,7 +24,10 @@ const ProjectBoard = props => {
             This is the project board pages for {props.project.id}
           </p>
           <button onClick={removeProject}>Remove Project</button>
-          <KanbanColumns project={props.project} />
+          <KanbanColumns
+            project={props.project}
+            onProjectUpdate={onProjectUpdate}
+          />
         </div>
       )}
     </div>
@@ -27,6 +36,8 @@ const ProjectBoard = props => {
 
 const mapDispatchToProps = (dispatch, props) => ({
   startRemoveProject: data => dispatch(startRemoveProject(data)),
+  startUpdateProject: (id, project) =>
+    dispatch(startUpdateProject(id, project)),
 });
 
 const mapStateToProps = (state, props) => {

@@ -17,17 +17,17 @@ export const startAddProject = (projectData = {}) => {
         'column-1': {
           id: 'column-1',
           title: 'To Do',
-          taskIDs: ['task-1'],
+          taskIDs: ['task-1', 'task-4'],
         },
         'column-2': {
           id: 'column-2',
           title: 'In Progress',
-          taskIDs: ['task-2'],
+          taskIDs: ['task-2', 'task-5'],
         },
         'column-3': {
           id: 'column-3',
           title: 'Done',
-          taskIDs: ['task-3'],
+          taskIDs: ['task-3', 'task-6'],
         },
       },
       tasks = {
@@ -42,6 +42,18 @@ export const startAddProject = (projectData = {}) => {
         'task-3': {
           id: 'task-3',
           content: 'Task for Done column',
+        },
+        'task-4': {
+          id: 'task-4',
+          content: 'Task 2 for To Do column',
+        },
+        'task-5': {
+          id: 'task-5',
+          content: 'Task 2 for In Progress column',
+        },
+        'task-6': {
+          id: 'task-6',
+          content: 'Task 2 for Done column',
         },
       },
       columnOrder = ['column-1', 'column-2', 'column-3'],
@@ -59,6 +71,24 @@ export const startAddProject = (projectData = {}) => {
       .push(project)
       .then(ref => {
         dispatch(addProject({ id: ref.key, ...project }));
+      });
+  };
+};
+
+export const updateProject = (id, updates) => ({
+  type: 'UPDATE_PROJECT',
+  id,
+  updates,
+});
+
+export const startUpdateProject = (id, updates) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database
+      .ref(`users/${uid}/projects/${id}`)
+      .update(updates)
+      .then(() => {
+        dispatch(updateProject(id, updates));
       });
   };
 };
