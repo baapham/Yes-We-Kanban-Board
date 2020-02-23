@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { connect } from 'react-redux';
 import uuid from 'uuid';
 
 const AddTaskModal = props => {
@@ -24,12 +23,7 @@ const AddTaskModal = props => {
       setError('Please provide a title and/or description');
     } else {
       setError('');
-      //   let task = {};
       const taskID = uuid();
-      //   task[taskID] = {};
-      //   task[taskID]['id'] = taskID;
-      //   task[taskID]['title'] = taskTitle;
-      //   task[taskID]['description'] = taskDescription;
       props.addTask({
         id: taskID,
         title: taskTitle,
@@ -43,7 +37,7 @@ const AddTaskModal = props => {
     <Modal
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
-      contentLabel="Example Modal"
+      contentLabel="Add a task"
     >
       <button onClick={props.closeModal}>close</button>
       <div>Add a Task</div>
@@ -68,4 +62,4 @@ const AddTaskModal = props => {
   );
 };
 
-export default connect()(AddTaskModal);
+export default AddTaskModal;

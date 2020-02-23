@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import uuid from 'uuid';
 import Column from './Column';
-
+import AddColumnModal from './AddColumnModal';
 const KanbanColumns = props => {
   const [columns, setColumns] = useState(
     props.project.columns ? props.project.columns : {},
@@ -12,6 +13,14 @@ const KanbanColumns = props => {
   const [columnOrder, setColumnOrder] = useState(
     props.project.columnOrder ? props.project.columnOrder : [],
   );
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   const onProjectUpdate = project => {
     props.onProjectUpdate(project);
   };
@@ -99,9 +108,42 @@ const KanbanColumns = props => {
     setTasks(newTasks);
     onProjectUpdate({ columns: newColumns, tasks: newTasks });
   };
+  const addColumn = column => {
+    const columnID = uuid();
+    // const newColumn = {
+    //   id: columnID,
+    //   title: columnTitle,
+    //   taskIDs: [],
+    // };
+    const newColumns = {
+      ...columns,
+      [columnID]: {
+        id: columnID,
+        title: column,
+        taskIDs: [],
+      },
+    };
+    let newColumnOrder = [...columnOrder];
+    newColumnOrder.push(columnID);
+    setColumns(newColumns);
+    setColumnOrder(newColumnOrder);
+    onProjectUpdate({
+      columns: newColumns,
+      columnOrder: newColumnOrder,
+    });
+    console.log(newColumns);
+    console.log(newColumnOrder);
+  };
   return (
     <div className="content-container">
       Columns
+      <button onClick={openModal}>Add a Column</button>
+      <AddColumnModal
+        modalIsOpen={modalIsOpen}
+        openModal={openModal}
+        closeModal={closeModal}
+        addColumn={addColumn}
+      />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           droppableId="all-columns"

@@ -39,7 +39,7 @@ const Column = props => {
             {props.column.title}
           </h3>
           <button className="add-task" onClick={openModal}>
-            Add Task
+            Add a Task
           </button>
           <AddTaskModal
             modalIsOpen={modalIsOpen}
