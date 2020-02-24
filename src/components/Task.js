@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 const Task = props => {
+  const [addConfirmDeleteIsOpen, setConfirmDeleteIsOpen] = useState(
+    false,
+  );
+  const openConfirmDeleteModal = () => {
+    setConfirmDeleteIsOpen(true);
+  };
+
+  const closeConfirmDeleteModal = () => {
+    setConfirmDeleteIsOpen(false);
+  };
+  const removeTask = () => {
+    props.removeTask(props.task.id);
+  };
   return (
     <Draggable draggableId={props.task.id} index={props.index}>
       {(provided, snapshot) => (
@@ -19,6 +33,16 @@ const Task = props => {
           </div>
           <h5>{props.task.title}</h5>
           <p>{props.task.description}</p>
+          <button onClick={openConfirmDeleteModal}>
+            Delete Task
+          </button>
+          <ConfirmDeleteModal
+            modalIsOpen={addConfirmDeleteIsOpen}
+            openModal={openConfirmDeleteModal}
+            closeModal={closeConfirmDeleteModal}
+            confirmRemove={removeTask}
+            item={'task'}
+          />
         </div>
       )}
     </Draggable>

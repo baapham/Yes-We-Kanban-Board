@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import uuid from 'uuid';
 import Column from './Column';
 import AddColumnModal from './AddColumnModal';
+
 const KanbanColumns = props => {
   const [columns, setColumns] = useState(
     props.project.columns ? props.project.columns : {},
@@ -13,13 +14,14 @@ const KanbanColumns = props => {
   const [columnOrder, setColumnOrder] = useState(
     props.project.columnOrder ? props.project.columnOrder : [],
   );
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => {
-    setIsOpen(true);
+  const [addColumnModalIsOpen, setAddColumnIsOpen] = useState(false);
+
+  const openAddColumnModal = () => {
+    setAddColumnIsOpen(true);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const closeAddColumnModal = () => {
+    setAddColumnIsOpen(false);
   };
   const onProjectUpdate = project => {
     props.onProjectUpdate(project);
@@ -86,8 +88,6 @@ const KanbanColumns = props => {
     }
   };
   const addTask = task => {
-    // console.log(task);
-    // console.log(columns[task.columnID]['taskIDs']);
     let newTask = {
       title: task.title,
       description: task.description,
@@ -108,13 +108,33 @@ const KanbanColumns = props => {
     setTasks(newTasks);
     onProjectUpdate({ columns: newColumns, tasks: newTasks });
   };
+  const removeTask = (removeTaskID, columnID) => {
+    let newTasks = {
+      ...tasks,
+    };
+    delete newTasks[removeTaskID];
+    let newColumn = {
+      ...columns[columnID],
+    };
+    newColumn.taskIDs.splice(
+      newColumn.taskIDs.indexOf(removeTaskID),
+      1,
+    );
+    const newColumns = {
+      ...columns,
+      [newColumn.id]: {
+        ...newColumn,
+      },
+    };
+    setTasks(newTasks);
+    setColumns(newColumns);
+    onProjectUpdate({
+      columns: newColumns,
+      tasks: newTasks,
+    });
+  };
   const addColumn = column => {
     const columnID = uuid();
-    // const newColumn = {
-    //   id: columnID,
-    //   title: columnTitle,
-    //   taskIDs: [],
-    // };
     const newColumns = {
       ...columns,
       [columnID]: {
@@ -131,17 +151,38 @@ const KanbanColumns = props => {
       columns: newColumns,
       columnOrder: newColumnOrder,
     });
-    console.log(newColumns);
-    console.log(newColumnOrder);
   };
+  const removeColumn = columnID => {
+    let newColumns = {
+      ...columns,
+    };
+    delete newColumns[columnID];
+    let newColumnOrder = [...columnOrder];
+    newColumnOrder.splice(newColumnOrder.indexOf(columnID), 1);
+    let newTasks = {
+      ...tasks,
+    };
+    for (let task of columns[columnID].taskIDs) {
+      delete newTasks[task];
+    }
+    setColumns(newColumns);
+    setColumnOrder(newColumnOrder);
+    setTasks(newTasks);
+    onProjectUpdate({
+      columns: newColumns,
+      columnOrder: newColumnOrder,
+      tasks: newTasks,
+    });
+  };
+
   return (
     <div className="content-container">
       Columns
-      <button onClick={openModal}>Add a Column</button>
+      <button onClick={openAddColumnModal}>Add a Column</button>
       <AddColumnModal
-        modalIsOpen={modalIsOpen}
-        openModal={openModal}
-        closeModal={closeModal}
+        modalIsOpen={addColumnModalIsOpen}
+        openModal={openAddColumnModal}
+        closeModal={closeAddColumnModal}
         addColumn={addColumn}
       />
       <DragDropContext onDragEnd={onDragEnd}>
@@ -172,6 +213,8 @@ const KanbanColumns = props => {
                     index={index}
                     onProjectUpdate={onProjectUpdate}
                     addTask={addTask}
+                    removeColumn={removeColumn}
+                    removeTask={removeTask}
                   />
                 );
               })}

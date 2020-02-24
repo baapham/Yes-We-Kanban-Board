@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import uuid from 'uuid';
 
@@ -17,6 +17,11 @@ const AddTaskModal = props => {
     setTaskDescription(description);
   };
 
+  const resetInputFields = () => {
+    setTaskTitle('');
+    setTaskDescription('');
+  };
+
   const addTask = e => {
     e.preventDefault();
     if (!taskTitle || !taskDescription) {
@@ -29,10 +34,13 @@ const AddTaskModal = props => {
         title: taskTitle,
         description: taskDescription,
       });
+      resetInputFields();
       props.closeModal();
     }
   };
-
+  useEffect(() => {
+    Modal.setAppElement('#root');
+  });
   return (
     <Modal
       isOpen={props.modalIsOpen}
