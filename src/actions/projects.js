@@ -1,5 +1,4 @@
 import database from '../firebase/firebase';
-import moment from 'moment';
 
 export const addProject = project => ({
   type: 'ADD_PROJECT',
@@ -14,55 +13,24 @@ export const startAddProject = (projectData = {}) => {
       description = '',
       createdAt = 0,
       columns = {
-        'column-1': {
-          id: 'column-1',
+        'to-do': {
+          id: 'to-do',
           title: 'To Do',
-          taskIDs: ['task-1', 'task-4'],
+          taskIDs: [],
         },
-        'column-2': {
-          id: 'column-2',
+        'in-progress': {
+          id: 'in-progress',
           title: 'In Progress',
-          taskIDs: ['task-2', 'task-5'],
+          taskIDs: [],
         },
-        'column-3': {
-          id: 'column-3',
+        done: {
+          id: 'done',
           title: 'Done',
-          taskIDs: ['task-3', 'task-6'],
+          taskIDs: [],
         },
       },
-      tasks = {
-        'task-1': {
-          id: 'task-1',
-          title: 'Task for To Do column',
-          description: 'This is some description',
-        },
-        'task-2': {
-          id: 'task-2',
-          title: 'Task for In Progress column',
-          description: 'This is some description',
-        },
-        'task-3': {
-          id: 'task-3',
-          title: 'Task for Done column',
-          description: 'This is some description',
-        },
-        'task-4': {
-          id: 'task-4',
-          title: 'Task 2 for To Do column',
-          description: 'This is some description',
-        },
-        'task-5': {
-          id: 'task-5',
-          title: 'Task 2 for In Progress column',
-          description: 'This is some description',
-        },
-        'task-6': {
-          id: 'task-6',
-          title: 'Task 2 for Done column',
-          description: 'This is some description',
-        },
-      },
-      columnOrder = ['column-1', 'column-2', 'column-3'],
+      tasks = {},
+      columnOrder = ['to-do', 'in-progress', 'done'],
     } = projectData;
     const project = {
       title,

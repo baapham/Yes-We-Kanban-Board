@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import uuid from 'uuid';
 import Column from './Column';
-import AddColumnModal from './AddColumnModal';
+import ColumnModal from './ColumnModal';
 
 const KanbanColumns = props => {
   const [columns, setColumns] = useState(
@@ -108,6 +108,22 @@ const KanbanColumns = props => {
     setTasks(newTasks);
     onProjectUpdate({ columns: newColumns, tasks: newTasks });
   };
+
+  const editTask = (updates, editTaskID) => {
+    let newTasks = {
+      ...tasks,
+      [editTaskID]: {
+        ...tasks[editTaskID],
+        title: updates.title,
+        description: updates.description,
+      },
+    };
+    setTasks(newTasks);
+    onProjectUpdate({
+      tasks: newTasks,
+    });
+  };
+
   const removeTask = (removeTaskID, columnID) => {
     let newTasks = {
       ...tasks,
@@ -152,6 +168,19 @@ const KanbanColumns = props => {
       columnOrder: newColumnOrder,
     });
   };
+  const editColumn = (updates, columnID) => {
+    const newColumns = {
+      ...columns,
+      [columnID]: {
+        ...columns[columnID],
+        title: updates,
+      },
+    };
+    setColumns(newColumns);
+    onProjectUpdate({
+      columns: newColumns,
+    });
+  };
   const removeColumn = columnID => {
     let newColumns = {
       ...columns,
@@ -179,11 +208,13 @@ const KanbanColumns = props => {
     <div className="content-container">
       Columns
       <button onClick={openAddColumnModal}>Add a Column</button>
-      <AddColumnModal
+      <ColumnModal
         modalIsOpen={addColumnModalIsOpen}
         openModal={openAddColumnModal}
         closeModal={closeAddColumnModal}
         addColumn={addColumn}
+        title={'Add a column'}
+        buttonText={'Add Column'}
       />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
@@ -215,6 +246,8 @@ const KanbanColumns = props => {
                     addTask={addTask}
                     removeColumn={removeColumn}
                     removeTask={removeTask}
+                    editColumn={editColumn}
+                    editTask={editTask}
                   />
                 );
               })}

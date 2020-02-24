@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import uuid from 'uuid';
 
-const AddTaskModal = props => {
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
+const TaskModal = props => {
+  const [taskTitle, setTaskTitle] = useState(
+    props.task ? props.task.title : '',
+  );
+  const [taskDescription, setTaskDescription] = useState(
+    props.task ? props.task.description : '',
+  );
   const [error, setError] = useState('');
 
   const onTaskTitleChange = e => {
@@ -28,13 +32,20 @@ const AddTaskModal = props => {
       setError('Please provide a title and/or description');
     } else {
       setError('');
-      const taskID = uuid();
-      props.addTask({
-        id: taskID,
-        title: taskTitle,
-        description: taskDescription,
-      });
-      resetInputFields();
+      if (!props.task) {
+        const taskID = uuid();
+        props.addTask({
+          id: taskID,
+          title: taskTitle,
+          description: taskDescription,
+        });
+        resetInputFields();
+      } else {
+        props.addTask({
+          title: taskTitle,
+          description: taskDescription,
+        });
+      }
       props.closeModal();
     }
   };
@@ -45,10 +56,10 @@ const AddTaskModal = props => {
     <Modal
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
-      contentLabel="Add a task"
+      contentLabel="Task Modal"
     >
       <button onClick={props.closeModal}>close</button>
-      <div>Add a Task</div>
+      <div>{props.title}</div>
       {error && <p>{error}</p>}
       <form>
         <input
@@ -64,10 +75,10 @@ const AddTaskModal = props => {
           value={taskDescription}
           onChange={onTaskDescriptionChange}
         />
-        <button onClick={addTask}>Create</button>
+        <button onClick={addTask}>{props.buttonText}</button>
       </form>
     </Modal>
   );
 };
 
-export default AddTaskModal;
+export default TaskModal;

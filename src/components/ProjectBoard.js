@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   startRemoveProject,
@@ -6,11 +6,20 @@ import {
 } from '../actions/projects';
 import KanbanColumns from './KanbanColumns';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import ProjectForm from './ProjectForm';
 
 const ProjectBoard = props => {
   const [addConfirmDeleteIsOpen, setConfirmDeleteIsOpen] = useState(
     false,
   );
+  const [addEditTaskIsOpen, setEditTaskIsOpen] = useState(false);
+  const openEditTaskModal = () => {
+    setEditTaskIsOpen(true);
+  };
+
+  const closeEditTaskModal = () => {
+    setEditTaskIsOpen(false);
+  };
   const removeProject = projectID => {
     props.startRemoveProject({ id: projectID });
     props.history.push('/');
@@ -31,9 +40,17 @@ const ProjectBoard = props => {
         <p>This project does not exist or you cannot view it</p>
       ) : (
         <div>
-          <p>
-            This is the project board pages for {props.project.id}
-          </p>
+          <h3>{props.project.title}</h3>
+          <p>{props.project.description}</p>
+          <button onClick={openEditTaskModal}>Edit Project</button>
+          <ProjectForm
+            modalIsOpen={addEditTaskIsOpen}
+            openModal={openEditTaskModal}
+            closeModal={closeEditTaskModal}
+            title={'Edit Project'}
+            buttonText={'Edit'}
+            project={props.project}
+          />
           <button onClick={openConfirmDeleteModal}>
             Remove Project
           </button>

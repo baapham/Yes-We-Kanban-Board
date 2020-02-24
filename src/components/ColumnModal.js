@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import uuid from 'uuid';
 
-const AddTaskModal = props => {
-  const [columnTitle, setColumnTitle] = useState('');
+const ColumnModal = props => {
+  const [columnTitle, setColumnTitle] = useState(
+    props.column ? props.column.title : '',
+  );
   const [error, setError] = useState('');
 
   const onColumnTitleChange = e => {
@@ -20,7 +22,9 @@ const AddTaskModal = props => {
     } else {
       setError('');
       props.addColumn(columnTitle);
-      resetInputFields();
+      if (!props.column) {
+        resetInputFields();
+      }
       props.closeModal();
     }
   };
@@ -31,10 +35,10 @@ const AddTaskModal = props => {
     <Modal
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
-      contentLabel="Add a column"
+      contentLabel="Column Modal"
     >
       <button onClick={props.closeModal}>close</button>
-      <div>Add a Column</div>
+      <div>{props.title}</div>
       {error && <p>{error}</p>}
       <form>
         <input
@@ -44,10 +48,10 @@ const AddTaskModal = props => {
           value={columnTitle}
           onChange={onColumnTitleChange}
         />
-        <button onClick={addColumn}>Create</button>
+        <button onClick={addColumn}>{props.buttonText}</button>
       </form>
     </Modal>
   );
 };
 
-export default AddTaskModal;
+export default ColumnModal;

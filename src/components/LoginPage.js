@@ -1,16 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startLogin } from '../actions/auth';
+import {
+  startGoogleLogin,
+  startAnonLogin,
+  startGithubLogin,
+} from '../actions/auth';
 
-const LoginPage = ({ startLogin }) => {
+const LoginPage = ({
+  startGoogleLogin,
+  startAnonLogin,
+  startGithubLogin,
+}) => {
   return (
     <div>
-      <button onClick={startLogin}>Login</button>
+      <button onClick={startAnonLogin}>Login Anonymously</button>
+      <button onClick={startGoogleLogin}>Login with Google</button>
+      <button onClick={startGithubLogin}>Login with Github</button>
     </div>
   );
 };
 const mapDispatchToProps = dispatch => ({
-  startLogin: () => dispatch(startLogin()),
+  startGoogleLogin: () => dispatch(startGoogleLogin()),
+  startAnonLogin: () => dispatch(startAnonLogin()),
+  startGithubLogin: () => dispatch(startGithubLogin()),
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startRemoveProject } from '../actions/projects';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const ProjectItem = props => {
@@ -9,6 +9,12 @@ const ProjectItem = props => {
       <div>
         <h3>{props.project.title}</h3>
         <p>{props.project.description}</p>
+        <p>
+          Created on{' '}
+          {moment(props.project.createdAt).format(
+            'MMMM Do YYYY h:mm A',
+          )}
+        </p>
       </div>
     </Link>
   );

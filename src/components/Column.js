@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import Modal from 'react-modal';
 import Task from './Task';
-import AddTaskModal from './AddTaskModal';
+import TaskModal from './TaskModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import ColumnModal from './ColumnModal';
 
 const Column = props => {
   const [addTaskModalIsOpen, setAddTaskModalIsOpen] = useState(false);
   const [addConfirmDeleteIsOpen, setConfirmDeleteIsOpen] = useState(
     false,
   );
+  const [addEditColumnIsOpen, setEditColumnIsOpen] = useState(false);
   const removeColumn = columnID => {
     props.removeColumn(columnID);
   };
@@ -19,6 +20,13 @@ const Column = props => {
 
   const closeConfirmDeleteModal = () => {
     setConfirmDeleteIsOpen(false);
+  };
+  const openEditColumnModal = () => {
+    setEditColumnIsOpen(true);
+  };
+
+  const closeEditColumnModal = () => {
+    setEditColumnIsOpen(false);
   };
 
   const openAddTaskModal = () => {
@@ -34,8 +42,16 @@ const Column = props => {
     props.addTask(taskObj);
   };
 
+  const editTask = (updates, editTaskID) => {
+    props.editTask(updates, editTaskID);
+  };
+
   const removeTask = taskID => {
     props.removeTask(taskID, props.column.id);
+  };
+
+  const editColumn = updates => {
+    props.editColumn(updates, props.column.id);
   };
 
   return (
@@ -49,6 +65,16 @@ const Column = props => {
           <h3 className="column-title" {...provided.dragHandleProps}>
             {props.column.title}
           </h3>
+          <button onClick={openEditColumnModal}>Edit Column</button>
+          <ColumnModal
+            modalIsOpen={addEditColumnIsOpen}
+            openModal={openEditColumnModal}
+            closeModal={closeEditColumnModal}
+            addColumn={editColumn}
+            column={props.column}
+            title={'Edit column'}
+            buttonText={'Edit'}
+          />
           <button onClick={openConfirmDeleteModal}>
             Delete Column
           </button>
@@ -63,11 +89,13 @@ const Column = props => {
           <button className="add-task" onClick={openAddTaskModal}>
             Add a Task
           </button>
-          <AddTaskModal
+          <TaskModal
             modalIsOpen={addTaskModalIsOpen}
             openModal={openAddTaskModal}
             closeModal={closeAddTaskModal}
             addTask={addTask}
+            title={'Add a task'}
+            buttonText={'Create'}
           />
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (
@@ -86,6 +114,7 @@ const Column = props => {
                     task={task}
                     index={index}
                     removeTask={removeTask}
+                    editTask={editTask}
                   />
                 ))}
                 {provided.placeholder}
