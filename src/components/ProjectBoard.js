@@ -40,28 +40,44 @@ const ProjectBoard = props => {
         <p>This project does not exist or you cannot view it</p>
       ) : (
         <div>
-          <h3>{props.project.title}</h3>
-          <p>{props.project.description}</p>
-          <button onClick={openEditTaskModal}>Edit Project</button>
-          <ProjectForm
-            modalIsOpen={addEditTaskIsOpen}
-            openModal={openEditTaskModal}
-            closeModal={closeEditTaskModal}
-            title={'Edit Project'}
-            buttonText={'Edit'}
-            project={props.project}
-          />
-          <button onClick={openConfirmDeleteModal}>
-            Remove Project
-          </button>
-          <ConfirmDeleteModal
-            modalIsOpen={addConfirmDeleteIsOpen}
-            openModal={openConfirmDeleteModal}
-            closeModal={closeConfirmDeleteModal}
-            confirmRemove={removeProject}
-            id={props.project.id}
-            item={'project'}
-          />
+          <div className="content-container">
+            <div className="project-board-header">
+              <h3 className="project-board-title">
+                {props.project.title}
+              </h3>
+              <div className="project-board-buttons">
+                <button
+                  className="button-edit"
+                  onClick={openEditTaskModal}
+                >
+                  Edit Project
+                </button>
+                <ProjectForm
+                  modalIsOpen={addEditTaskIsOpen}
+                  openModal={openEditTaskModal}
+                  closeModal={closeEditTaskModal}
+                  title={'Edit Project'}
+                  buttonText={'Edit'}
+                  project={props.project}
+                />
+                <button
+                  className="button-remove"
+                  onClick={openConfirmDeleteModal}
+                >
+                  Remove Project
+                </button>
+                <ConfirmDeleteModal
+                  modalIsOpen={addConfirmDeleteIsOpen}
+                  openModal={openConfirmDeleteModal}
+                  closeModal={closeConfirmDeleteModal}
+                  confirmRemove={removeProject}
+                  id={props.project.id}
+                  item={'project'}
+                />
+              </div>
+            </div>
+          </div>
+
           <KanbanColumns
             project={props.project}
             onProjectUpdate={onProjectUpdate}

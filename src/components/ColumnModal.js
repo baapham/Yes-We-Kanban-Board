@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import uuid from 'uuid';
 
 const ColumnModal = props => {
   const [columnTitle, setColumnTitle] = useState(

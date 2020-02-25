@@ -31,6 +31,7 @@ export const startAddProject = (projectData = {}) => {
       },
       tasks = {},
       columnOrder = ['to-do', 'in-progress', 'done'],
+      taskCounter = 1,
     } = projectData;
     const project = {
       title,
@@ -39,6 +40,7 @@ export const startAddProject = (projectData = {}) => {
       columns,
       tasks,
       columnOrder,
+      taskCounter,
     };
     database
       .ref(`users/${uid}/projects`)

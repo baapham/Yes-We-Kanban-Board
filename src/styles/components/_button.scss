@@ -1,0 +1,22 @@
+.button-add {
+  background: $blue;
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: $font-size-large;
+  font-weight: 300;
+  margin: $xl-size;
+  padding: $s-size;
+  text-decoration: none;
+  width: 20rem;
+}
+
+.button-edit {
+  @extend .button-add;
+  background: $yellow;
+}
+
+.button-remove {
+  @extend .button-add;
+  background: $red;
+}

@@ -1,0 +1,27 @@
+.project-item {
+  border: 1px solid $dark-grey;
+  padding: $l-size;
+  &:hover {
+    background-color: $green;
+  }
+  transition: background-color 0.2s ease;
+}
+
+.project-item-link {
+  color: $dark-grey;
+  text-decoration: none;
+}
+
+.project-item-title {
+  text-align: center;
+  word-break: break-all;
+}
+
+.project-item-description {
+  font-size: $m-size;
+  word-break: break-all;
+}
+.project-item-createdAt {
+  color: $grey;
+  word-break: break-all;
+}

@@ -15,7 +15,9 @@ const Header = () => {
             <NavLink className="header-item" to="/help">
               Help
             </NavLink>
-            <button onClick={startLogout()}>Logout</button>
+            <button onClick={startLogout()} className="header-button">
+              Logout
+            </button>
           </div>
         </div>
       </div>

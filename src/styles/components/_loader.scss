@@ -1,0 +1,21 @@
+.loader {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  pointer-events: none;
+  position: absolute;
+  width: 100vw;
+}
+
+.loader__image {
+  width: 6rem;
+  height: 6rem;
+  pointer-events: auto;
+  transition: visibility 0.2s ease;
+  visibility: visible;
+}
+
+.loader__image-hidden {
+  visibility: hidden;
+}

@@ -14,7 +14,7 @@ const ProjectForm = props => {
   const [description, setDescription] = useState(
     props.project ? props.project.description : '',
   );
-  const [createdAt, setCreatedAt] = useState(
+  const [createdAt] = useState(
     props.project ? props.project.createdAt : moment(),
   );
   const [error, setError] = useState('');
