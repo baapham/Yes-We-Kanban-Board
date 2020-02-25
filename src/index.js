@@ -24,7 +24,16 @@ const renderApp = () => {
     hasRendered = true;
   }
 };
-ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
+ReactDOM.render(
+  <div className="loader">
+    <img
+      className="loader__image"
+      src="/images/loader.svg"
+      alt="loader"
+    />
+  </div>,
+  document.getElementById('root'),
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

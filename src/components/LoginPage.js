@@ -16,6 +16,16 @@ const LoginPage = ({
       'loader__image';
     startAnonLogin();
   };
+  const loadGoogleLogin = () => {
+    document.getElementById('login-loader').className =
+      'loader__image';
+    startGoogleLogin();
+  };
+  const loadGithubLogin = () => {
+    document.getElementById('login-loader').className =
+      'loader__image';
+    startGithubLogin();
+  };
   return (
     <div>
       <div className="box-layout">
@@ -25,11 +35,11 @@ const LoginPage = ({
             <img src="/images/lock.svg" alt="anonymous" />
             <p className="login-button-title">Login Anonymously</p>
           </button>
-          <button onClick={startGoogleLogin} className="login-button">
+          <button onClick={loadGoogleLogin} className="login-button">
             <img src="/images/google.svg" alt="google" />
             <p className="login-button-title">Login with Google</p>
           </button>
-          <button onClick={startGithubLogin} className="login-button">
+          <button onClick={loadGithubLogin} className="login-button">
             <img src="/images/github.svg" alt="github" />
             <p className="login-button-title">Login with Github</p>
           </button>

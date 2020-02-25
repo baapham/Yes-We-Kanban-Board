@@ -11,7 +11,7 @@
 .loader__image {
   width: 6rem;
   height: 6rem;
-  pointer-events: auto;
+  pointer-events: none;
   transition: visibility 0.2s ease;
   visibility: visible;
 }
