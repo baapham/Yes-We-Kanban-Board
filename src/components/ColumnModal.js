@@ -35,20 +35,36 @@ const ColumnModal = props => {
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
       contentLabel="Column Modal"
+      className="modal"
     >
-      <button onClick={props.closeModal}>close</button>
-      <div>{props.title}</div>
-      {error && <p>{error}</p>}
-      <form>
-        <input
-          type="text"
-          placeholder="Column Title"
-          autoFocus
-          value={columnTitle}
-          onChange={onColumnTitleChange}
-        />
-        <button onClick={addColumn}>{props.buttonText}</button>
-      </form>
+      <div className="modal-content">
+        <div className="modal-button-close">
+          <button
+            className="button-remove-small"
+            onClick={props.closeModal}
+          >
+            x
+          </button>
+        </div>
+        <h3 className="modal__title">{props.title}</h3>
+        {error && <p className="error">{error}</p>}
+        <form>
+          <input
+            type="text"
+            placeholder="Column Title"
+            autoFocus
+            value={columnTitle}
+            onChange={onColumnTitleChange}
+            className="modal-input"
+          />
+          <button
+            className="button-confirm-small"
+            onClick={addColumn}
+          >
+            {props.buttonText}
+          </button>
+        </form>
+      </div>
     </Modal>
   );
 };

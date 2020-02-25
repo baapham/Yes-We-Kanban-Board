@@ -18,13 +18,37 @@ const ConfirmDeleteModal = props => {
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
       contentLabel="Remove Confirmation"
+      className="modal"
     >
-      <button onClick={props.closeModal}>close</button>
-      <div>Are you sure you want to remove this {props.item}?</div>
-      <form>
-        <button onClick={removeItem}>Yes</button>
-        <button onClick={cancelRemoveItem}>No</button>
-      </form>
+      <div className="modal-content">
+        <div className="modal-button-close">
+          <button
+            className="button-remove-small"
+            onClick={props.closeModal}
+          >
+            x
+          </button>
+        </div>
+        <div>
+          <h3 className="modal__title">
+            Are you sure you want to remove this {props.item}?
+          </h3>
+          <form>
+            <button
+              className="button-confirm-small"
+              onClick={removeItem}
+            >
+              Yes
+            </button>
+            <button
+              className="button-remove-small"
+              onClick={cancelRemoveItem}
+            >
+              No
+            </button>
+          </form>
+        </div>
+      </div>
     </Modal>
   );
 };

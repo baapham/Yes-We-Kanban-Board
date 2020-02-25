@@ -78,7 +78,7 @@ const Column = props => {
               closeModal={closeAddTaskModal}
               addTask={addTask}
               title={'Add a task'}
-              buttonText={'Create'}
+              buttonText={'Add'}
             />
             <button
               onClick={openEditColumnModal}

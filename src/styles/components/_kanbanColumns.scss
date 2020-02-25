@@ -1,7 +1,7 @@
 .columns-container {
   display: flex;
   line-height: 1em;
-  overflow-x: scroll;
+  overflow: auto;
   width: 100%;
 }
 .columns-container::-webkit-scrollbar {
@@ -9,11 +9,11 @@
 }
 
 .columns-container::-webkit-scrollbar:vertical {
-  width: 11px;
+  width: 15px;
 }
 
 .columns-container::-webkit-scrollbar:horizontal {
-  height: 11px;
+  height: 15px;
 }
 
 .columns-container::-webkit-scrollbar-thumb {

@@ -41,3 +41,8 @@
   @extend .button-add;
   margin: 0;
 }
+
+.button-confirm-small {
+  @extend .button-add-small;
+  background: $green;
+}

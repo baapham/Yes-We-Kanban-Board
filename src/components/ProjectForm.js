@@ -32,6 +32,10 @@ const ProjectForm = props => {
   const editProject = project => {
     props.dispatch(startUpdateProject(props.project.id, project));
   };
+  const resetInputFields = () => {
+    setTitle('');
+    setDescription('');
+  };
   const onSubmit = e => {
     e.preventDefault();
     if (!title || !description) {
@@ -51,6 +55,7 @@ const ProjectForm = props => {
           createdAt: createdAt.valueOf(),
         });
       }
+      resetInputFields();
       props.closeModal();
     }
   };
@@ -62,26 +67,42 @@ const ProjectForm = props => {
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
       contentLabel="Project Modal"
+      className="modal"
     >
-      <button onClick={props.closeModal}>close</button>
-      <div>{props.title}</div>
-      {error && <p>{error}</p>}
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          autoFocus
-          value={title}
-          onChange={onTitleChange}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={onDescriptionChange}
-        />
-        <button>{props.buttonText}</button>
-      </form>
+      <div className="modal-content">
+        <div className="modal-button-close">
+          <button
+            className="button-remove-small"
+            onClick={props.closeModal}
+          >
+            x
+          </button>
+        </div>
+        <h3 className="modal__title">{props.title}</h3>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={onSubmit}>
+          <div className="modal-input-form">
+            <input
+              type="text"
+              placeholder="Title"
+              autoFocus
+              value={title}
+              onChange={onTitleChange}
+              className="modal-input"
+            />
+            <textarea
+              className="modal-input"
+              type="text"
+              placeholder="Description"
+              value={description}
+              onChange={onDescriptionChange}
+            />
+            <button className="button-confirm-small">
+              {props.buttonText}
+            </button>
+          </div>
+        </form>
+      </div>
     </Modal>
   );
 };

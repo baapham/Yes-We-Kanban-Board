@@ -34,47 +34,40 @@ const Task = props => {
         <div
           className="task-container"
           {...provided.draggableProps}
+          {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
           <div className="task-items">
             <h5 className="task-title">{props.task.title}</h5>
             <div className="task-item-buttons">
-              <div
-                className="drag-handler"
-                {...provided.dragHandleProps}
+              <button
+                className="button-edit-small"
+                onClick={openEditTaskModal}
               >
-                &#9776;
-              </div>
-              <div>
-                <button
-                  className="button-edit-small"
-                  onClick={openEditTaskModal}
-                >
-                  &#9998;
-                </button>
-                <TaskModal
-                  modalIsOpen={addEditTaskIsOpen}
-                  openModal={openEditTaskModal}
-                  closeModal={closeEditTaskModal}
-                  title={'Edit Task'}
-                  buttonText={'Edit'}
-                  addTask={editTask}
-                  task={props.task}
-                />
-                <button
-                  className="button-remove-small"
-                  onClick={openConfirmDeleteModal}
-                >
-                  -
-                </button>
-                <ConfirmDeleteModal
-                  modalIsOpen={addConfirmDeleteIsOpen}
-                  openModal={openConfirmDeleteModal}
-                  closeModal={closeConfirmDeleteModal}
-                  confirmRemove={removeTask}
-                  item={'task'}
-                />
-              </div>
+                &#9998;
+              </button>
+              <TaskModal
+                modalIsOpen={addEditTaskIsOpen}
+                openModal={openEditTaskModal}
+                closeModal={closeEditTaskModal}
+                title={'Edit Task'}
+                buttonText={'Edit'}
+                addTask={editTask}
+                task={props.task}
+              />
+              <button
+                className="button-remove-small"
+                onClick={openConfirmDeleteModal}
+              >
+                -
+              </button>
+              <ConfirmDeleteModal
+                modalIsOpen={addConfirmDeleteIsOpen}
+                openModal={openConfirmDeleteModal}
+                closeModal={closeConfirmDeleteModal}
+                confirmRemove={removeTask}
+                item={'task'}
+              />
             </div>
             <p className="task-description">
               {props.task.description}

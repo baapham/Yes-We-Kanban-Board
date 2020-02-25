@@ -219,7 +219,7 @@ const KanbanColumns = props => {
           closeModal={closeAddColumnModal}
           addColumn={addColumn}
           title={'Add a column'}
-          buttonText={'Add Column'}
+          buttonText={'Add'}
         />
       </div>
       <DragDropContext onDragEnd={onDragEnd}>

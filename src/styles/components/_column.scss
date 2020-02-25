@@ -5,8 +5,31 @@
   display: flex;
   flex-direction: column;
   margin: $s-size;
+  height: fit-content;
+  max-height: 90vh;
   min-width: 30rem;
+  // overflow: scroll;
+  overflow-y: auto;
 }
+
+.column-container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.column-container::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.column-container::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.column-container::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid $light-grey; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .column-title {
   margin: 0;
   padding: $xs-size;

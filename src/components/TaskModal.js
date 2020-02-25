@@ -57,26 +57,40 @@ const TaskModal = props => {
       isOpen={props.modalIsOpen}
       onRequestClose={props.closeModal}
       contentLabel="Task Modal"
+      className="modal"
     >
-      <button onClick={props.closeModal}>close</button>
-      <div>{props.title}</div>
-      {error && <p>{error}</p>}
-      <form>
-        <input
-          type="text"
-          placeholder="Task Title"
-          autoFocus
-          value={taskTitle}
-          onChange={onTaskTitleChange}
-        />
-        <input
-          type="text"
-          placeholder="Task Description"
-          value={taskDescription}
-          onChange={onTaskDescriptionChange}
-        />
-        <button onClick={addTask}>{props.buttonText}</button>
-      </form>
+      <div className="modal-content">
+        <div className="modal-button-close">
+          <button
+            className="button-remove-small"
+            onClick={props.closeModal}
+          >
+            x
+          </button>
+        </div>
+        <h3 className="modal__title">{props.title}</h3>
+        {error && <p className="error">{error}</p>}
+        <form>
+          <input
+            type="text"
+            placeholder="Task Title"
+            autoFocus
+            value={taskTitle}
+            onChange={onTaskTitleChange}
+            className="modal-input"
+          />
+          <input
+            type="text"
+            placeholder="Task Description"
+            value={taskDescription}
+            onChange={onTaskDescriptionChange}
+            className="modal-input"
+          />
+          <button onClick={addTask} className="button-confirm-small">
+            {props.buttonText}
+          </button>
+        </form>
+      </div>
     </Modal>
   );
 };
