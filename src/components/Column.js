@@ -65,38 +65,51 @@ const Column = props => {
           <h3 className="column-title" {...provided.dragHandleProps}>
             {props.column.title}
           </h3>
-          <button onClick={openEditColumnModal}>Edit Column</button>
-          <ColumnModal
-            modalIsOpen={addEditColumnIsOpen}
-            openModal={openEditColumnModal}
-            closeModal={closeEditColumnModal}
-            addColumn={editColumn}
-            column={props.column}
-            title={'Edit column'}
-            buttonText={'Edit'}
-          />
-          <button onClick={openConfirmDeleteModal}>
-            Delete Column
-          </button>
-          <ConfirmDeleteModal
-            modalIsOpen={addConfirmDeleteIsOpen}
-            openModal={openConfirmDeleteModal}
-            closeModal={closeConfirmDeleteModal}
-            confirmRemove={removeColumn}
-            id={props.column.id}
-            item={'column'}
-          />
-          <button className="add-task" onClick={openAddTaskModal}>
-            Add a Task
-          </button>
-          <TaskModal
-            modalIsOpen={addTaskModalIsOpen}
-            openModal={openAddTaskModal}
-            closeModal={closeAddTaskModal}
-            addTask={addTask}
-            title={'Add a task'}
-            buttonText={'Create'}
-          />
+          <div className="buttons-column">
+            <button
+              className="button-add-small"
+              onClick={openAddTaskModal}
+            >
+              +
+            </button>
+            <TaskModal
+              modalIsOpen={addTaskModalIsOpen}
+              openModal={openAddTaskModal}
+              closeModal={closeAddTaskModal}
+              addTask={addTask}
+              title={'Add a task'}
+              buttonText={'Create'}
+            />
+            <button
+              onClick={openEditColumnModal}
+              className="button-edit-small"
+            >
+              &#9998;
+            </button>
+            <ColumnModal
+              modalIsOpen={addEditColumnIsOpen}
+              openModal={openEditColumnModal}
+              closeModal={closeEditColumnModal}
+              addColumn={editColumn}
+              column={props.column}
+              title={'Edit column'}
+              buttonText={'Edit'}
+            />
+            <button
+              className="button-remove-small"
+              onClick={openConfirmDeleteModal}
+            >
+              -
+            </button>
+            <ConfirmDeleteModal
+              modalIsOpen={addConfirmDeleteIsOpen}
+              openModal={openConfirmDeleteModal}
+              closeModal={closeConfirmDeleteModal}
+              confirmRemove={removeColumn}
+              id={props.column.id}
+              item={'column'}
+            />
+          </div>
           <Droppable droppableId={props.column.id} type="task">
             {(provided, snapshot) => (
               <div

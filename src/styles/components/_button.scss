@@ -11,12 +11,33 @@
   width: 20rem;
 }
 
+.button-add-small {
+  @extend .button-add;
+  height: 4rem;
+  margin: 0 4px;
+  padding: 0;
+  width: 4rem;
+}
+
 .button-edit {
   @extend .button-add;
+  background: $yellow;
+}
+
+.button-edit-small {
+  @extend .button-add-small;
   background: $yellow;
 }
 
 .button-remove {
   @extend .button-add;
   background: $red;
+}
+.button-remove-small {
+  @extend .button-add-small;
+  background: $red;
+}
+.button-add-column {
+  @extend .button-add;
+  margin: 0;
 }

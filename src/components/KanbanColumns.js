@@ -205,17 +205,23 @@ const KanbanColumns = props => {
   };
 
   return (
-    <div className="content-container">
-      Columns
-      <button onClick={openAddColumnModal}>Add a Column</button>
-      <ColumnModal
-        modalIsOpen={addColumnModalIsOpen}
-        openModal={openAddColumnModal}
-        closeModal={closeAddColumnModal}
-        addColumn={addColumn}
-        title={'Add a column'}
-        buttonText={'Add Column'}
-      />
+    <div>
+      <div className="content-container">
+        <button
+          className="button-add-column"
+          onClick={openAddColumnModal}
+        >
+          + Add a Column
+        </button>
+        <ColumnModal
+          modalIsOpen={addColumnModalIsOpen}
+          openModal={openAddColumnModal}
+          closeModal={closeAddColumnModal}
+          addColumn={addColumn}
+          title={'Add a column'}
+          buttonText={'Add Column'}
+        />
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable
           droppableId="all-columns"

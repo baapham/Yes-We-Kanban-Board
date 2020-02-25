@@ -3,17 +3,33 @@
   border: 1px solid lightgrey;
   border-radius: 2px;
   display: flex;
-  padding: 8px;
+  justify-content: center;
+  padding: $xs-size;
   margin-bottom: 8px;
   transition: background-color 0.2s ease;
 }
-
-.task-container-dragging {
-  @extend .task-container;
-  background-color: $green;
-  border: 1px solid $green;
+.task-title {
+  text-align: center;
+  font-size: $m-size;
+  padding: 0;
+  margin: $xs-size;
+  word-break: break-all;
+}
+.task-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.task-item-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .drag-handler {
   margin-right: $s-size;
+}
+
+.task-description {
+  font-size: $s-size;
+  word-break: break-all;
 }

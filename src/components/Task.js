@@ -32,39 +32,54 @@ const Task = props => {
     <Draggable draggableId={props.task.id} index={props.index}>
       {(provided, snapshot) => (
         <div
-          className={
-            snapshot.isDragging
-              ? 'task-container-dragging'
-              : 'task-container'
-          }
+          className="task-container"
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="drag-handler" {...provided.dragHandleProps}>
-            &#9776;
+          <div className="task-items">
+            <h5 className="task-title">{props.task.title}</h5>
+            <div className="task-item-buttons">
+              <div
+                className="drag-handler"
+                {...provided.dragHandleProps}
+              >
+                &#9776;
+              </div>
+              <div>
+                <button
+                  className="button-edit-small"
+                  onClick={openEditTaskModal}
+                >
+                  &#9998;
+                </button>
+                <TaskModal
+                  modalIsOpen={addEditTaskIsOpen}
+                  openModal={openEditTaskModal}
+                  closeModal={closeEditTaskModal}
+                  title={'Edit Task'}
+                  buttonText={'Edit'}
+                  addTask={editTask}
+                  task={props.task}
+                />
+                <button
+                  className="button-remove-small"
+                  onClick={openConfirmDeleteModal}
+                >
+                  -
+                </button>
+                <ConfirmDeleteModal
+                  modalIsOpen={addConfirmDeleteIsOpen}
+                  openModal={openConfirmDeleteModal}
+                  closeModal={closeConfirmDeleteModal}
+                  confirmRemove={removeTask}
+                  item={'task'}
+                />
+              </div>
+            </div>
+            <p className="task-description">
+              {props.task.description}
+            </p>
           </div>
-          <h5>{props.task.title}</h5>
-          <p>{props.task.description}</p>
-          <button onClick={openEditTaskModal}>Edit</button>
-          <TaskModal
-            modalIsOpen={addEditTaskIsOpen}
-            openModal={openEditTaskModal}
-            closeModal={closeEditTaskModal}
-            title={'Edit Task'}
-            buttonText={'Edit'}
-            addTask={editTask}
-            task={props.task}
-          />
-          <button onClick={openConfirmDeleteModal}>
-            Delete Task
-          </button>
-          <ConfirmDeleteModal
-            modalIsOpen={addConfirmDeleteIsOpen}
-            openModal={openConfirmDeleteModal}
-            closeModal={closeConfirmDeleteModal}
-            confirmRemove={removeTask}
-            item={'task'}
-          />
         </div>
       )}
     </Draggable>
